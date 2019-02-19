@@ -12,6 +12,16 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'market' => [
+            'class' => \app\components\Market::class,
+            'exchanges' => [
+                'binance' => [
+                    'class' => \app\components\exchanges\Binance::class,
+                    'api_key' => 'IYA5q5ZHH0Tq31SnkKfJdyEuixVHsEnBqKcpZhoMlQOHHSxcJpSz2cYEoK8ZhPpX',
+                    'api_secret' => 'XpY6RjYxxvQ0kR0wCs3m1pyyzciFTe4lXx2rpaTGt33XQZCcYtRGH3QbAZd9XP7N',
+                ],
+            ],
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '3V9hrLvNh3JpYI-1coayoQ_d7viYIivh',
