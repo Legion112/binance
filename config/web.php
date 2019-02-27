@@ -15,11 +15,7 @@ $config = [
         'market' => [
             'class' => \app\components\Market::class,
             'exchanges' => [
-                'binance' => [
-                    'class' => \app\components\exchanges\Binance::class,
-                    'api_key' => 'IYA5q5ZHH0Tq31SnkKfJdyEuixVHsEnBqKcpZhoMlQOHHSxcJpSz2cYEoK8ZhPpX',
-                    'api_secret' => 'XpY6RjYxxvQ0kR0wCs3m1pyyzciFTe4lXx2rpaTGt33XQZCcYtRGH3QbAZd9XP7N',
-                ],
+                'binance' => \app\components\exchanges\Binance::class,
             ],
         ],
         'request' => [
@@ -63,6 +59,20 @@ $config = [
         */
     ],
     'params' => $params,
+    'container' => [
+        'definitions' => [
+            'yii\widgets\LinkPager' => ['maxButtonCount' => 5]
+        ],
+        'singletons' => [
+            \Binance\API::class => [
+                null,
+                [
+                    'IYA5q5ZHH0Tq31SnkKfJdyEuixVHsEnBqKcpZhoMlQOHHSxcJpSz2cYEoK8ZhPpX',
+                    'XpY6RjYxxvQ0kR0wCs3m1pyyzciFTe4lXx2rpaTGt33XQZCcYtRGH3QbAZd9XP7N'
+                ]
+            ]
+        ]
+    ]
 ];
 
 if (YII_ENV_DEV) {

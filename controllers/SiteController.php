@@ -19,15 +19,15 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
+
     public function actionIndex()
     {
+        $exchange = Yii::$app->market->getExchange('binance');
+
+        $balances = $exchange->balances();
+
         return $this->render('index', [
-            'exchange' => Yii::$app->market->getExchange('binance')
+            'balances' => $balances,
         ]);
     }
 }

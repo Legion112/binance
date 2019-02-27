@@ -14,8 +14,8 @@ class Market implements \yii\base\Configurable
 
     public function __construct(array $config = [])
     {
-        foreach ($config['exchanges'] as $name => $options) {
-            $this->exchanges[$name] = \Yii::createObject($options);
+        foreach ($config['exchanges'] as $name => $className) {
+            $this->exchanges[$name] = \Yii::createObject($className);
         }
     }
 

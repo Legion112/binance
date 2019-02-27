@@ -1,8 +1,10 @@
 <?php
 
+use app\components\exchanges\BalanceInterface;
+
 /**
  * @var $this yii\web\View
- * @var $exchange \app\components\exchanges\ExchangeInterface;
+ * @var $balances BalanceInterface[];
  */
 
 $this->title = 'My Yii Application';
@@ -15,14 +17,26 @@ $this->title = 'My Yii Application';
             <div class="col-lg-12">
                 <?= \yii\grid\GridView::widget([
                     'dataProvider' => new \yii\data\ArrayDataProvider([
-                        'allModels' => $exchange->prices(),
+                        'allModels' => $balances,
                         'pagination' => [
                             'pageSize' => 25,
                         ],
                     ]),
                     'columns' => [
-                        'symbol:text:Валюта',
-                        'price:text:Доступный остаток',
+                        [
+                            'label' => 'Валюта',
+                            'value' => function (BalanceInterface $balance) {
+                                return $balance->getSymbol();
+                            }
+
+                        ],
+                        [
+                            'label' => 'Остаток',
+                            'value' => function (BalanceInterface $balance) {
+                                return $balance->getValue();
+                            }
+
+                        ],
                     ]
                 ]) ?>
             </div>

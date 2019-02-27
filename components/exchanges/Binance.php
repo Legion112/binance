@@ -2,28 +2,26 @@
 
 namespace app\components\exchanges;
 
-use Binance\API;
-use yii\base\Configurable;
-
-class Binance extends API implements ExchangeInterface, Configurable
+class Binance implements ExchangeInterface
 {
-    public function __construct(array $config = [])
+    /**
+     * @var \Binance\API
+     */
+    private $api;
+
+    public function __construct(\Binance\API $api)
     {
-        parent::__construct($config['api_key'], $config['api_secret']);
-        $this->caOverride = true;
+        $this->api = $api;
     }
 
-    public function prices(): array
+    public function balances(): array
     {
-        $prices = [];
-        foreach (parent::prices() as $symbol => $price) {
-            $prices[] = ['symbol' => $symbol, 'price' => $price];
+        $ticker = $this->api->prices(); // Make sure you have an updated ticker object for this to work
+        $balances = [];
+        foreach ($this->api->balances($ticker) as $symbol => $data) {
+            $balances[] = new Balance($symbol, $data['available']);
         }
-        return $prices;
-    }
 
-    public function price(string $symbol): float
-    {
-        return parent::price($symbol);
+        return $balances;
     }
 }

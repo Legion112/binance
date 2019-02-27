@@ -11,7 +11,9 @@ namespace app\components\exchanges;
 
 interface ExchangeInterface
 {
-    public function price(string $symbol): float;
-
-    public function prices(): array;
+    /**
+     * @return BalanceInterface[]
+     * @throws \Exception
+     */
+    public function balances(): array;
 }
