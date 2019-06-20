@@ -2,11 +2,23 @@
 
 namespace app\controllers;
 
-use Yii;
+use app\components\Market;
+use yii\base\Module;
 use yii\web\Controller;
 
 class SiteController extends Controller
 {
+    /**
+     * @var Market
+     */
+    private $market;
+
+    public function __construct(string $id, Module $module, Market $market, array $config = [])
+    {
+        parent::__construct($id, $module, $config);
+        $this->market = $market;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -22,7 +34,7 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        $exchange = Yii::$app->market->getExchange('binance');
+        $exchange = $this->market->getExchange('BINANCE');
 
         $balances = $exchange->balances();
 

@@ -12,12 +12,6 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
-        'market' => [
-            'class' => \app\components\Market::class,
-            'exchanges' => [
-                'binance' => \app\components\exchanges\Binance::class,
-            ],
-        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '3V9hrLvNh3JpYI-1coayoQ_d7viYIivh',
@@ -64,6 +58,11 @@ $config = [
             'yii\widgets\LinkPager' => ['maxButtonCount' => 5]
         ],
         'singletons' => [
+            \app\components\Market::class => [
+                'exchanges' => [
+                    'BINANCE' => \app\components\exchanges\Binance::class,
+                ],
+            ],
             \Binance\API::class => [
                 null,
                 [
